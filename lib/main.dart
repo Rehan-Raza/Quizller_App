@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quizzler/question.dart';
-import 'question.dart';
+import 'package:quizzler/quiz_brain.dart';
+
+
 void main() => runApp(Quizzler());
 
 class Quizzler extends StatelessWidget {
@@ -24,18 +25,19 @@ class QuizPage extends StatefulWidget {
   @override
   _QuizPageState createState() => _QuizPageState();
 }
-
+QuizBrain newQuizBrain = QuizBrain();
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-  List<String> questions = [
-    'You can lead a cow down stairs but not upstairs.',
-    'Approximate one quarter of human bones are in feet.',
-    'A slug\s blood is green.',
-  ];
+  // List<String> questions = [
+  // 'You can lead a cow down stairs but not upstairs.',
+  //'Approximate one quarter of human bones are in feet.',
+  //'A slug\s blood is green.',
+  //];
   int questionNo = 0;
-  List<bool> answers = [false, true, true];
+  //List<bool> answers = [false, true, true];
 
-Question q1 = Question(q:'You can lead a cow down stairs but not upstairs.', a: false);
+//Question q1 = Question(q:'You can lead a cow down stairs but not upstairs.', a: false);
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -48,7 +50,7 @@ Question q1 = Question(q:'You can lead a cow down stairs but not upstairs.', a: 
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNo],
+                newQuizBrain.questionBank[questionNo].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -72,7 +74,7 @@ Question q1 = Question(q:'You can lead a cow down stairs but not upstairs.', a: 
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = answers[questionNo];
+                bool correctAnswer = newQuizBrain.questionBank[questionNo].questionAnswer;
                 if (correctAnswer == true) {
                   print('right');
                 } else {
@@ -107,7 +109,7 @@ Question q1 = Question(q:'You can lead a cow down stairs but not upstairs.', a: 
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = answers[questionNo];
+                bool correctAnswer = newQuizBrain.questionBank[questionNo].questionAnswer;
                 if (correctAnswer == false) {
                   print('right');
                 } else {
@@ -117,7 +119,7 @@ Question q1 = Question(q:'You can lead a cow down stairs but not upstairs.', a: 
                   () {
                     questionNo++;
                     scoreKeeper.add(Icon(
-                      Icons.image,
+                      Icons.notifications_paused,
                     ));
                   },
                 );

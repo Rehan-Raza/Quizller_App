@@ -5,7 +5,7 @@ class Question {
 
   Question({ String q, bool a}) {
 
-    questionText = q;
+    questionText = q ;
     questionAnswer = a ;
 
   }

@@ -33,7 +33,7 @@ class _QuizPageState extends State<QuizPage> {
   //'Approximate one quarter of human bones are in feet.',
   //'A slug\s blood is green.',
   //];
-  int questionNo = 0;
+  
   //List<bool> answers = [false, true, true];
 
 //Question q1 = Question(q:'You can lead a cow down stairs but not upstairs.', a: false);
@@ -50,7 +50,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                newQuizBrain.questionBank[questionNo].questionText,
+                newQuizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -74,7 +74,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = newQuizBrain.questionBank[questionNo].questionAnswer;
+                bool correctAnswer = newQuizBrain.getCorrectAnswer();
                 if (correctAnswer == true) {
                   print('right');
                 } else {
@@ -82,7 +82,7 @@ class _QuizPageState extends State<QuizPage> {
                 }
                 setState(
                   () {
-                    questionNo++;
+                   newQuizBrain.next();
                     scoreKeeper.add(
                       Icon(
                         Icons.check,
@@ -109,7 +109,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = newQuizBrain.questionBank[questionNo].questionAnswer;
+                bool correctAnswer = newQuizBrain.getCorrectAnswer();
                 if (correctAnswer == false) {
                   print('right');
                 } else {
@@ -117,7 +117,7 @@ class _QuizPageState extends State<QuizPage> {
                 }
                 setState(
                   () {
-                    questionNo++;
+                    newQuizBrain.next();
                     scoreKeeper.add(Icon(
                       Icons.notifications_paused,
                     ));
